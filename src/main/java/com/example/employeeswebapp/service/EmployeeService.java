@@ -1,11 +1,11 @@
 package com.example.employeeswebapp.service;
 
-import com.example.employeeswebapp.model.Product;
+import com.example.employeeswebapp.model.Employee;
 import org.springframework.data.domain.Page;
 
 public interface EmployeeService {
-    void saveEmployee(Product employee);
-    Product getEmployeeById(long id);
+    void saveEmployee(Employee employee);
+    Employee getEmployeeById(long id);
     void deleteEmployeeById(long id);
-    Page<Product> listAll(int pageNo, int pageSize, String sortField, String sortDirection, String keyword);
+    Page<Employee> listAll(int pageNo, int pageSize, String sortField, String sortDirection, String keyword);
 }

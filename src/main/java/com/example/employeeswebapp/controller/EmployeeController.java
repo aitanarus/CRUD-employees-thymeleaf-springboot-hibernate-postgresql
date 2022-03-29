@@ -1,6 +1,6 @@
 package com.example.employeeswebapp.controller;
 
-import com.example.employeeswebapp.model.Product;
+import com.example.employeeswebapp.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -27,13 +27,13 @@ public class EmployeeController {
     @GetMapping("/showNewProductForm")
     public String showNewEmployeeForm(Model model) {
         // create model attribute to bind form data
-        Product product = new Product();
+        Employee product = new Employee();
         model.addAttribute("product", product);
-        return "new_product";
+        return "new_employee";
     }
 
     @PostMapping("/saveProduct")
-        public String saveEmployee(@ModelAttribute("product") Product product) {
+        public String saveEmployee(@ModelAttribute("product") Employee product) {
             // save employee to database
             employeeService.saveEmployee(product);
             return "redirect:/";
@@ -43,11 +43,11 @@ public class EmployeeController {
         public String showFormForUpdate(@PathVariable ( value = "id") long id, Model model) {
 
             // get employee from the service
-            Product product = employeeService.getEmployeeById(id);
+            Employee product = employeeService.getEmployeeById(id);
 
             // set employee as a model attribute to pre-populate the form
             model.addAttribute("product", product);
-            return "update_product";
+            return "update_employee";
         }
 
         @GetMapping("/deleteEmployee/{id}")
@@ -66,8 +66,8 @@ public class EmployeeController {
                                 Model model) {
         int pageSize = 5;
 
-        Page<Product> page = employeeService.listAll(pageNo, pageSize, sortField, sortDir, keyword);
-        List<Product> listProducts = page.getContent();
+        Page<Employee> page = employeeService.listAll(pageNo, pageSize, sortField, sortDir, keyword);
+        List<Employee> listProducts = page.getContent();
 
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
@@ -79,6 +79,5 @@ public class EmployeeController {
         model.addAttribute("listEmployees", listProducts);
         return "index";
     }
-
 
 }
